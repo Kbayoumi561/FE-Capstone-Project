@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const RecipeCard = ({ recipe, isFavorite, onFavoriteToggle }) => {
   return (
@@ -11,14 +12,22 @@ const RecipeCard = ({ recipe, isFavorite, onFavoriteToggle }) => {
       <h2 className="text-lg font-semibold mt-2">{recipe.strMeal}</h2>
       <p className="text-sm text-gray-600">{recipe.strCategory}</p>
       <p className="text-sm text-gray-600">{recipe.strArea}</p>
-      <button
-        onClick={onFavoriteToggle}
-        className={`mt-2 px-4 py-2 text-sm rounded ${
-          isFavorite ? 'bg-red-500 text-white' : 'bg-gray-200 text-black'
-        }`}
-      >
-        {isFavorite ? 'Remove Favorite' : 'Add to Favorites'}
-      </button>
+      <div className="flex justify-between mt-4">
+        <button
+          onClick={onFavoriteToggle}
+          className={`px-4 py-2 text-sm rounded ${
+            isFavorite ? 'bg-red-500 text-white' : 'bg-gray-200 text-black'
+          }`}
+        >
+          {isFavorite ? 'Remove Favorite' : 'Add to Favorites'}
+        </button>
+        <Link
+          to={`/recipe/${recipe.idMeal}`}
+          className="px-4 py-2 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Learn More
+        </Link>
+      </div>
     </div>
   );
 };

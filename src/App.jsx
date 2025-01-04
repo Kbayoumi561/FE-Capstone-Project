@@ -6,6 +6,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import { fetchRecipes } from './utils/api';
+import RecipeDetails from './pages/RecipeDetails';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -47,6 +48,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy" element={<Privacy />} />
+              <Route path="/recipe/:idMeal" element={<RecipeDetails />} />
             </Routes>
           </div>
         </main>
