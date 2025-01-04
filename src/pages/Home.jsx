@@ -5,14 +5,14 @@ import RecipeCard from '../components/RecipeCard';
 
 const Home = ({ onSearch, recipes, error }) => {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
+    <div className="min-h-screen flex flex-col bg-gray-50">
       {/* Header */}
-      <header className="bg-orange-500 text-white p-4">
-        <div className="container mx-auto flex justify-between items-center">
+      <header className="bg-orange-500 text-white py-4 shadow-lg">
+        <div className="container mx-auto flex justify-between items-center px-4">
           {/* Logo */}
-          <h1 className="text-2xl font-bold">Recipe Finder</h1>
+          <h1 className="text-3xl font-bold tracking-wide">Recipe Finder</h1>
           {/* Navigation Links */}
-          <nav className="space-x-6">
+          <nav className="space-x-6 text-lg">
             <Link to="/" className="hover:underline">
               Home
             </Link>
@@ -27,20 +27,28 @@ const Home = ({ onSearch, recipes, error }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow p-4">
+      <main className="flex-grow container mx-auto px-4 py-8">
         {/* Search Bar */}
-        <SearchBar onSearch={onSearch} />
+        <div className="text-center mb-8">
+          <SearchBar onSearch={onSearch} />
+        </div>
+
         {/* Error Message */}
-        {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+        {error && (
+          <p className="text-red-500 text-center text-lg font-semibold mb-6">
+            {error}
+          </p>
+        )}
+
         {/* Recipe Cards */}
-        <div className="flex flex-wrap justify-center mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {recipes.length > 0 ? (
             recipes.map((recipe) => (
               <RecipeCard key={recipe.idMeal} recipe={recipe} />
             ))
           ) : (
             !error && (
-              <p className="text-gray-600 text-center mt-4">
+              <p className="text-gray-600 text-center col-span-full">
                 No recipes found. Try searching for something else.
               </p>
             )
@@ -49,8 +57,8 @@ const Home = ({ onSearch, recipes, error }) => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-orange-500 text-white p-4">
-        <div className="container mx-auto flex justify-between items-center">
+      <footer className="bg-orange-500 text-white py-4">
+        <div className="container mx-auto flex justify-between items-center px-4">
           <Link to="/contact" className="hover:underline">
             Contact Us
           </Link>
@@ -64,9 +72,9 @@ const Home = ({ onSearch, recipes, error }) => {
 };
 
 Home.propTypes = {
-  onSearch: PropTypes.func.isRequired, // Ensures onSearch is a function
-  recipes: PropTypes.array.isRequired, // Validates that recipes is an array
-  error: PropTypes.string.isRequired, // Validates that error is a string
+  onSearch: PropTypes.func.isRequired,
+  recipes: PropTypes.array.isRequired,
+  error: PropTypes.string.isRequired,
 };
 
 export default Home;

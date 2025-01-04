@@ -9,17 +9,17 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <div className="flex items-center bg-white rounded-md shadow-md p-2 w-3/4 max-w-xl">
+    <div className="flex justify-center items-center bg-white shadow-md rounded-full overflow-hidden max-w-lg mx-auto">
       <input
         type="text"
-        className="flex-grow p-2 rounded-l-md focus:outline-none"
+        className="flex-grow px-4 py-2 text-lg focus:outline-none"
         placeholder="Search for Recipe"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
       <button
         onClick={handleSearch}
-        className="bg-orange-500 text-white px-4 py-2 rounded-r-md hover:bg-orange-600"
+        className="bg-orange-500 text-white px-6 py-2 hover:bg-orange-600 transition"
       >
         🔍
       </button>
@@ -28,7 +28,7 @@ const SearchBar = ({ onSearch }) => {
 };
 
 SearchBar.propTypes = {
-  onSearch: PropTypes.func.isRequired, 
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default SearchBar;
