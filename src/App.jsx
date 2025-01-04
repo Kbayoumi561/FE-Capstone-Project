@@ -25,7 +25,8 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col bg-gray-100">
-        <header className="bg-orange-500 text-white p-4">
+        {/* Header */}
+        <header className="bg-orange-500 text-white p-4 shadow-md">
           <div className="container mx-auto flex justify-between items-center">
             <h1 className="text-2xl font-bold">Recipe Finder</h1>
             <nav className="space-x-6">
@@ -36,7 +37,9 @@ function App() {
             </nav>
           </div>
         </header>
-        <main className="flex-grow">
+
+        {/* Routes */}
+        <main className="flex-grow container mx-auto p-4">
           <Routes>
             <Route
               path="/"
@@ -48,6 +51,8 @@ function App() {
             <Route path="/privacy" element={<Privacy />} />
           </Routes>
         </main>
+
+        {/* Footer */}
         <footer className="bg-orange-500 text-white p-4">
           <div className="container mx-auto flex justify-between items-center">
             <Link to="/contact" className="hover:underline">Contact Us</Link>
