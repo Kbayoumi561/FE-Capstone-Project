@@ -6,7 +6,9 @@ const RecipeDetails = () => {
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isFavorite, setIsFavorite] = useState(false);
 
+  // Fetch recipe details on mount
   useEffect(() => {
     const fetchRecipeDetails = async () => {
       setLoading(true);
@@ -33,6 +35,29 @@ const RecipeDetails = () => {
 
     fetchRecipeDetails();
   }, [idMeal]);
+
+  // Check if the recipe is already in favorites
+  useEffect(() => {
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    setIsFavorite(savedFavorites.some((fav) => fav.idMeal === idMeal));
+  }, [idMeal]);
+
+  // Toggle favorite status
+  const handleToggleFavorite = () => {
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    if (isFavorite) {
+      // Remove from favorites
+      const updatedFavorites = savedFavorites.filter((fav) => fav.idMeal !== idMeal);
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    } else {
+      // Add to favorites
+      if (recipe) {
+        savedFavorites.push(recipe);
+        localStorage.setItem('favorites', JSON.stringify(savedFavorites));
+      }
+    }
+    setIsFavorite(!isFavorite);
+  };
 
   if (loading) {
     return (
@@ -94,6 +119,14 @@ const RecipeDetails = () => {
           ></iframe>
         </div>
       )}
+      <button
+        onClick={handleToggleFavorite}
+        className={`mt-4 px-4 py-2 text-sm rounded ${
+          isFavorite ? 'bg-red-500 text-white' : 'bg-blue-500 text-white'
+        }`}
+      >
+        {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+      </button>
     </div>
   );
 };
