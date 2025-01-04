@@ -6,7 +6,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import { fetchRecipes } from './utils/api';
-import RecipeDetails from './pages/RecipeDetails';
+import RecipeDetails from './components/RecipeDetails';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
