@@ -4,9 +4,9 @@ import RecipeCard from '../components/RecipeCard';
 
 const Home = ({ onSearch, recipes, error }) => {
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center">
       {/* Search Bar */}
-      <div className="text-center mb-8">
+      <div className="w-full max-w-lg mb-8">
         <SearchBar onSearch={onSearch} />
       </div>
 
@@ -18,7 +18,7 @@ const Home = ({ onSearch, recipes, error }) => {
       )}
 
       {/* Recipe Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
         {recipes.length > 0 ? (
           recipes.map((recipe) => (
             <RecipeCard key={recipe.idMeal} recipe={recipe} />

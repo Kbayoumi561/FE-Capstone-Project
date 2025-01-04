@@ -26,10 +26,10 @@ function App() {
     <Router>
       <div className="min-h-screen flex flex-col bg-gray-100">
         {/* Header */}
-        <header className="bg-orange-500 text-white p-4 shadow-md">
-          <div className="container mx-auto flex justify-between items-center">
-            <h1 className="text-2xl font-bold">Recipe Finder</h1>
-            <nav className="space-x-6">
+        <header className="bg-orange-500 text-white py-4 shadow-md">
+          <div className="container mx-auto flex justify-between items-center px-6">
+            <h1 className="text-3xl font-bold tracking-wide">Recipe Finder</h1>
+            <nav className="space-x-6 text-lg">
               <Link to="/" className="hover:underline">Home</Link>
               <Link to="/favorites" className="hover:underline">Favorites</Link>
               <Link to="/about" className="hover:underline">About Us</Link>
@@ -38,8 +38,8 @@ function App() {
           </div>
         </header>
 
-        {/* Routes */}
-        <main className="flex-grow container mx-auto p-4">
+        {/* Main Content */}
+        <main className="flex-grow container mx-auto p-6 text-center">
           <Routes>
             <Route
               path="/"
@@ -53,8 +53,8 @@ function App() {
         </main>
 
         {/* Footer */}
-        <footer className="bg-orange-500 text-white p-4">
-          <div className="container mx-auto flex justify-between items-center">
+        <footer className="bg-orange-500 text-white py-4">
+          <div className="container mx-auto flex justify-between px-6">
             <Link to="/contact" className="hover:underline">Contact Us</Link>
             <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
           </div>
