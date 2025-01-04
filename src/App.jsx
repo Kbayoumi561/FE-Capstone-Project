@@ -8,14 +8,14 @@ import Privacy from './pages/Privacy';
 import { fetchRecipes } from './utils/api';
 
 function App() {
-  const [recipes, setRecipes] = useState([]); // Recipes state
-  const [error, setError] = useState(''); // Error state
+  const [recipes, setRecipes] = useState([]);
+  const [error, setError] = useState('');
 
   const handleSearch = async (query) => {
     setError('');
     try {
-      const data = await fetchRecipes(query); // Fetch recipes
-      setRecipes(data.meals || []); // Update recipes
+      const data = await fetchRecipes(query);
+      setRecipes(data.meals || []);
     } catch (err) {
       console.error('Error fetching recipes:', err);
       setError('Failed to fetch recipes. Please try again later.');
@@ -25,7 +25,6 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col bg-gray-100">
-        {/* Header */}
         <header className="bg-orange-500 text-white py-4 shadow-md">
           <div className="container mx-auto flex justify-between items-center px-6">
             <h1 className="text-3xl font-bold tracking-wide">Recipe Finder</h1>
@@ -38,21 +37,18 @@ function App() {
           </div>
         </header>
 
-        {/* Main Content */}
-        <main className="flex-grow container mx-auto p-6 text-center">
-          <Routes>
-            <Route
-              path="/"
-              element={<Home onSearch={handleSearch} recipes={recipes} error={error} />}
-            />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy" element={<Privacy />} />
-          </Routes>
+        <main className="flex-grow">
+          <div className="container mx-auto p-6">
+            <Routes>
+              <Route path="/" element={<Home onSearch={handleSearch} recipes={recipes} error={error} />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy" element={<Privacy />} />
+            </Routes>
+          </div>
         </main>
 
-        {/* Footer */}
         <footer className="bg-orange-500 text-white py-4">
           <div className="container mx-auto flex justify-between px-6">
             <Link to="/contact" className="hover:underline">Contact Us</Link>
