@@ -30,9 +30,9 @@ function App() {
           <div className="flex justify-between items-center px-4 lg:px-6">
             <h1 className="text-3xl font-bold tracking-wide">Recipe Finder</h1>
             <nav className="space-x-6 text-lg">
-              <Link to="/" className="hover:underline">Home</Link>
-              <Link to="/favorites" className="hover:underline">Favorites</Link>
-              <Link to="/about" className="hover:underline">About Us</Link>
+              <Link to="/" className="hover:underline text-white">Home</Link>
+              <Link to="/favorites" className="hover:underline text-white">Favorites</Link>
+              <Link to="/about" className="hover:underline text-white">About Us</Link>
             </nav>
           </div>
         </header>
@@ -53,9 +53,9 @@ function App() {
 
         {/* Footer */}
         <footer className="bg-orange-500 text-white py-4">
-          <div className="container mx-auto flex justify-end px-6 space-x-6">
-            <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
-            <Link to="/contact" className="hover:underline">Contact Us</Link>
+          <div className="flex justify-between items-center px-4 lg:px-6">
+            <Link to="/privacy" className="hover:underline text-white">Privacy Policy</Link>
+            <Link to="/contact" className="hover:underline text-white">Contact Us</Link>
           </div>
         </footer>
       </div>
