@@ -27,7 +27,7 @@ function App() {
       <div className="min-h-screen flex flex-col bg-gray-100">
         {/* Header */}
         <header className="bg-orange-500 text-white py-4 shadow-md">
-          <div className="container mx-auto flex justify-between items-center px-6">
+          <div className="flex justify-between items-center px-4 lg:px-6">
             <h1 className="text-3xl font-bold tracking-wide">Recipe Finder</h1>
             <nav className="space-x-6 text-lg">
               <Link to="/" className="hover:underline">Home</Link>
@@ -36,6 +36,7 @@ function App() {
             </nav>
           </div>
         </header>
+
 
         {/* Main Content */}
         <main className="flex-grow">
@@ -52,7 +53,7 @@ function App() {
 
         {/* Footer */}
         <footer className="bg-orange-500 text-white py-4">
-          <div className="container mx-auto flex justify-between px-6">
+          <div className="container mx-auto flex justify-end px-6 space-x-6">
             <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
             <Link to="/contact" className="hover:underline">Contact Us</Link>
           </div>
