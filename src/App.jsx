@@ -25,6 +25,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col bg-gray-100">
+        {/* Header */}
         <header className="bg-orange-500 text-white py-4 shadow-md">
           <div className="container mx-auto flex justify-between items-center px-6">
             <h1 className="text-3xl font-bold tracking-wide">Recipe Finder</h1>
@@ -32,11 +33,11 @@ function App() {
               <Link to="/" className="hover:underline">Home</Link>
               <Link to="/favorites" className="hover:underline">Favorites</Link>
               <Link to="/about" className="hover:underline">About Us</Link>
-              <Link to="/contact" className="hover:underline">Contact</Link>
             </nav>
           </div>
         </header>
 
+        {/* Main Content */}
         <main className="flex-grow">
           <div className="container mx-auto p-6">
             <Routes>
@@ -49,10 +50,11 @@ function App() {
           </div>
         </main>
 
+        {/* Footer */}
         <footer className="bg-orange-500 text-white py-4">
           <div className="container mx-auto flex justify-between px-6">
-            <Link to="/contact" className="hover:underline">Contact Us</Link>
             <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
+            <Link to="/contact" className="hover:underline">Contact Us</Link>
           </div>
         </footer>
       </div>
