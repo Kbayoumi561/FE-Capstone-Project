@@ -1,37 +1,73 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { fetchRecipes } from '../utils/api';
 
 const RecipeDetails = () => {
   const { idMeal } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchRecipeDetails = async () => {
+      setLoading(true);
+      setError('');
       try {
-        const data = await fetchRecipes('');
-        const selectedRecipe = data.meals.find((meal) => meal.idMeal === idMeal);
-        setRecipe(selectedRecipe);
-      } catch (error) {
-        console.error('Failed to fetch recipe details:', error);
+        const response = await fetch(
+          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch recipe details.');
+        }
+        const data = await response.json();
+        if (data.meals && data.meals.length > 0) {
+          setRecipe(data.meals[0]);
+        } else {
+          setError('Recipe not found.');
+        }
+      } catch (err) {
+        setError(err.message || 'An unexpected error occurred.');
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchRecipeDetails();
   }, [idMeal]);
 
-  if (!recipe) {
-    return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div className="container mx-auto p-6">
+        <p className="text-center">Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto p-6">
+        <p className="text-center text-red-500">{error}</p>
+        <Link to="/" className="text-blue-500 hover:underline">
+          Back to Home
+        </Link>
+      </div>
+    );
   }
 
   return (
-    <div className="p-6 container mx-auto">
-      <Link to="/" className="text-blue-500 hover:underline">Back to Home</Link>
+    <div className="container mx-auto p-6">
+      <Link to="/" className="text-blue-500 hover:underline">
+        Back to Home
+      </Link>
       <h1 className="text-3xl font-bold mt-4">{recipe.strMeal}</h1>
       <img
         src={recipe.strMealThumb}
         alt={recipe.strMeal}
         className="rounded-lg w-full my-4"
       />
+      <h2 className="text-xl font-semibold">Category</h2>
+      <p className="mb-4">{recipe.strCategory}</p>
+      <h2 className="text-xl font-semibold">Cuisine</h2>
+      <p className="mb-4">{recipe.strArea}</p>
       <h2 className="text-xl font-semibold">Ingredients</h2>
       <ul className="list-disc list-inside mb-4">
         {Object.keys(recipe)
