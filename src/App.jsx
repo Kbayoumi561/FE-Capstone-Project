@@ -5,8 +5,9 @@ import Favorites from './pages/Favorites';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
-import { fetchRecipes } from './utils/api';
 import RecipeDetails from './components/RecipeDetails';
+import ShoppingList from './pages/ShoppingList';
+import { fetchRecipes } from './utils/api';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -34,21 +35,25 @@ function App() {
               <Link to="/" className="hover:underline text-white">Home</Link>
               <Link to="/favorites" className="hover:underline text-white">Favorites</Link>
               <Link to="/about" className="hover:underline text-white">About Us</Link>
+              <Link to="/shopping-list" className="hover:underline text-white">Shopping List</Link>
             </nav>
           </div>
         </header>
-
 
         {/* Main Content */}
         <main className="flex-grow">
           <div className="container mx-auto p-6">
             <Routes>
-              <Route path="/" element={<Home onSearch={handleSearch} recipes={recipes} error={error} />} />
+              <Route
+                path="/"
+                element={<Home onSearch={handleSearch} recipes={recipes} error={error} />}
+              />
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/recipe/:idMeal" element={<RecipeDetails />} />
+              <Route path="/shopping-list" element={<ShoppingList />} />
             </Routes>
           </div>
         </main>

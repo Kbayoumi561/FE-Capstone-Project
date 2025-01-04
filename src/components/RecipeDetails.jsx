@@ -7,6 +7,7 @@ const RecipeDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
+  const [shoppingList, setShoppingList] = useState([]);
 
   // Fetch recipe details on mount
   useEffect(() => {
@@ -42,21 +43,39 @@ const RecipeDetails = () => {
     setIsFavorite(savedFavorites.some((fav) => fav.idMeal === idMeal));
   }, [idMeal]);
 
+  // Load shopping list from localStorage on mount
+  useEffect(() => {
+    const savedShoppingList = JSON.parse(localStorage.getItem('shoppingList')) || [];
+    setShoppingList(savedShoppingList);
+  }, []);
+
+  // Save shopping list to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('shoppingList', JSON.stringify(shoppingList));
+  }, [shoppingList]);
+
   // Toggle favorite status
   const handleToggleFavorite = () => {
     const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
     if (isFavorite) {
-      // Remove from favorites
       const updatedFavorites = savedFavorites.filter((fav) => fav.idMeal !== idMeal);
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
     } else {
-      // Add to favorites
       if (recipe) {
         savedFavorites.push(recipe);
         localStorage.setItem('favorites', JSON.stringify(savedFavorites));
       }
     }
     setIsFavorite(!isFavorite);
+  };
+
+  // Handle ingredient selection for shopping list
+  const toggleIngredientInShoppingList = (ingredient) => {
+    if (shoppingList.includes(ingredient)) {
+      setShoppingList(shoppingList.filter((item) => item !== ingredient));
+    } else {
+      setShoppingList([...shoppingList, ingredient]);
+    }
   };
 
   if (loading) {
@@ -98,8 +117,16 @@ const RecipeDetails = () => {
         {Object.keys(recipe)
           .filter((key) => key.startsWith('strIngredient') && recipe[key])
           .map((key, index) => (
-            <li key={index}>
-              {recipe[key]} - {recipe[`strMeasure${key.slice(13)}`]}
+            <li key={index} className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={shoppingList.includes(recipe[key])}
+                onChange={() => toggleIngredientInShoppingList(recipe[key])}
+                className="mr-2"
+              />
+              <span>
+                {recipe[key]} - {recipe[`strMeasure${key.slice(13)}`]}
+              </span>
             </li>
           ))}
       </ul>
@@ -127,6 +154,12 @@ const RecipeDetails = () => {
       >
         {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
       </button>
+      <Link
+        to="/shopping-list"
+        className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 inline-block"
+      >
+        View Shopping List
+      </Link>
     </div>
   );
 };
