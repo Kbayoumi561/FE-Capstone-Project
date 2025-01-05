@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import foodImage from 'src/assets/foodImage.jpg';
+import foodImage from '../assets/foodImage.jpg';
 
 const WelcomeModal = ({ onClose }) => {
   useEffect(() => {
