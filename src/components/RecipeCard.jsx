@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
 
 const RecipeCard = ({ recipe, isFavorite, onFavoriteToggle }) => {
+  const shareUrl = `${window.location.origin}/recipe/${recipe.idMeal}`;
+  const shareText = `Check out this recipe: ${recipe.strMeal}`;
+
   return (
     <div className="border rounded-lg p-4 shadow-md">
       <img
@@ -27,6 +31,23 @@ const RecipeCard = ({ recipe, isFavorite, onFavoriteToggle }) => {
         >
           Learn More
         </Link>
+      </div>
+      <div className="mt-4 flex space-x-2">
+        <FacebookShareButton url={shareUrl} quote={shareText}>
+          <button className="px-2 py-1 bg-blue-600 text-white rounded text-sm">
+            Facebook
+          </button>
+        </FacebookShareButton>
+        <TwitterShareButton url={shareUrl} title={shareText}>
+          <button className="px-2 py-1 bg-blue-400 text-white rounded text-sm">
+            Twitter
+          </button>
+        </TwitterShareButton>
+        <WhatsappShareButton url={shareUrl} title={shareText}>
+          <button className="px-2 py-1 bg-green-500 text-white rounded text-sm">
+            WhatsApp
+          </button>
+        </WhatsappShareButton>
       </div>
     </div>
   );

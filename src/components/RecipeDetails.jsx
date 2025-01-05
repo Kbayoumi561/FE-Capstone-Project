@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
 
 const RecipeDetails = () => {
   const { idMeal } = useParams();
@@ -77,6 +78,9 @@ const RecipeDetails = () => {
       setShoppingList([...shoppingList, ingredient]);
     }
   };
+
+  const shareUrl = `${window.location.origin}/recipe/${idMeal}`;
+  const shareText = `Check out this recipe: ${recipe ? recipe.strMeal : ''}`;
 
   if (loading) {
     return (
@@ -160,6 +164,23 @@ const RecipeDetails = () => {
       >
         View Shopping List
       </Link>
+      <div className="mt-6 flex space-x-4">
+        <FacebookShareButton url={shareUrl} quote={shareText}>
+          <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Share on Facebook
+          </button>
+        </FacebookShareButton>
+        <TwitterShareButton url={shareUrl} title={shareText}>
+          <button className="px-4 py-2 bg-blue-400 text-white rounded hover:bg-blue-500">
+            Share on Twitter
+          </button>
+        </TwitterShareButton>
+        <WhatsappShareButton url={shareUrl} title={shareText}>
+          <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+            Share on WhatsApp
+          </button>
+        </WhatsappShareButton>
+      </div>
     </div>
   );
 };
