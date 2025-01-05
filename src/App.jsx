@@ -7,7 +7,7 @@ import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import RecipeDetails from './components/RecipeDetails';
 import ShoppingList from './pages/ShoppingList';
-import WelcomeModal from './components/WelcomeModal'; // Import the WelcomeModal
+import WelcomeModal from './components/WelcomeModal'; 
 import { fetchRecipes } from './utils/api';
 
 function App() {
@@ -15,14 +15,9 @@ function App() {
   const [error, setError] = useState('');
   const [showWelcome, setShowWelcome] = useState(false);
 
-  // Show the Welcome Modal only on the user's first visit
   useEffect(() => {
-    const hasVisited = localStorage.getItem('hasVisited');
-    if (!hasVisited) {
-      setShowWelcome(true);
-      localStorage.setItem('hasVisited', 'true');
-    }
-  }, []);
+    setShowWelcome(true); // Always show the modal
+  }, []);  
 
   const handleCloseWelcomeModal = () => {
     setShowWelcome(false);
