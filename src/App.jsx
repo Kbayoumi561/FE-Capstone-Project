@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
@@ -7,11 +7,26 @@ import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import RecipeDetails from './components/RecipeDetails';
 import ShoppingList from './pages/ShoppingList';
+import WelcomeModal from './components/WelcomeModal'; // Import the WelcomeModal
 import { fetchRecipes } from './utils/api';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState('');
+  const [showWelcome, setShowWelcome] = useState(false);
+
+  // Show the Welcome Modal only on the user's first visit
+  useEffect(() => {
+    const hasVisited = localStorage.getItem('hasVisited');
+    if (!hasVisited) {
+      setShowWelcome(true);
+      localStorage.setItem('hasVisited', 'true');
+    }
+  }, []);
+
+  const handleCloseWelcomeModal = () => {
+    setShowWelcome(false);
+  };
 
   const handleSearch = async (query) => {
     setError('');
@@ -27,6 +42,9 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col bg-gray-100">
+        {/* Welcome Modal */}
+        {showWelcome && <WelcomeModal onClose={handleCloseWelcomeModal} />}
+
         {/* Header */}
         <header className="bg-orange-500 text-white py-4 shadow-md">
           <div className="flex justify-between items-center px-4 lg:px-6">
