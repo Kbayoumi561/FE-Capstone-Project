@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
+import foodImage from 'src/assets/food.jpg';
 
 const WelcomeModal = ({ onClose }) => {
   useEffect(() => {
@@ -24,9 +25,9 @@ const WelcomeModal = ({ onClose }) => {
             the world!
           </p>
           <img
-            src="https://via.placeholder.com/300"
-            alt="World Cuisines"
-            className="mx-auto rounded-lg shadow-md mb-6"
+              src={foodImage}
+              alt="World Cuisines"
+              className="mx-auto rounded-lg shadow-md mb-6"
           />
             <p className="text-gray-600">
             <em>{`"Good food is the foundation of genuine happiness."`}</em> – Auguste Escoffier
