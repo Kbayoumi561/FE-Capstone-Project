@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
@@ -8,6 +8,7 @@ import Privacy from './pages/Privacy';
 import RecipeDetails from './components/RecipeDetails';
 import ShoppingList from './pages/ShoppingList';
 import WelcomeModal from './components/WelcomeModal';
+import SearchBar from './components/SearchBar';
 import { fetchRecipes } from './utils/api';
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
   const [showWelcome, setShowWelcome] = useState(false);
 
   // Show welcome modal initially
-  useState(() => {
+  useEffect(() => {
     setShowWelcome(true);
   }, []);
 
@@ -86,6 +87,9 @@ function App() {
         {/* Main Content */}
         <main className="flex-grow">
           <div className="container mx-auto p-6">
+            {/* Search Bar */}
+            <SearchBar onSearch={handleSearch} recipes={recipes} />
+
             <Routes>
               <Route
                 path="/"
