@@ -8,8 +8,6 @@ import Privacy from './pages/Privacy';
 import RecipeDetails from './components/RecipeDetails';
 import ShoppingList from './pages/ShoppingList';
 import WelcomeModal from './components/WelcomeModal';
-import SearchBar from './components/SearchBar';
-import { fetchRecipes } from './utils/api';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -25,7 +23,10 @@ function App() {
   const handleSearch = async (query) => {
     setError('');
     try {
-      const data = await fetchRecipes(query);
+      const response = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
+      );
+      const data = await response.json();
       setRecipes(data.meals || []);
     } catch (err) {
       console.error('Error fetching recipes:', err);
@@ -65,7 +66,7 @@ function App() {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2}
-                stroke="black" /* Black lines inside the white box */
+                stroke="black"
                 className="w-6 h-6"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
@@ -87,9 +88,6 @@ function App() {
         {/* Main Content */}
         <main className="flex-grow">
           <div className="container mx-auto p-6">
-            {/* Search Bar */}
-            <SearchBar onSearch={handleSearch} recipes={recipes} />
-
             <Routes>
               <Route
                 path="/"
