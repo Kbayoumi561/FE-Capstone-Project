@@ -54,7 +54,7 @@ function App() {
 
             {/* Mobile Menu Icon */}
             <button
-              className="md:hidden text-white"
+              className="md:hidden bg-white p-2 rounded"
               onClick={() => setShowMobileMenu(!showMobileMenu)}
               aria-label="Toggle Navigation Menu"
             >
@@ -64,7 +64,7 @@ function App() {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2}
-                stroke="currentColor"
+                stroke="black" /* Black lines inside the white box */
                 className="w-6 h-6"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
