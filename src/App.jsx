@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
@@ -17,7 +17,7 @@ function App() {
   const [showWelcome, setShowWelcome] = useState(false);
 
   // Show welcome modal initially
-  useEffect(() => {
+  useState(() => {
     setShowWelcome(true);
   }, []);
 
@@ -34,15 +34,7 @@ function App() {
 
   return (
     <Router>
-      <div
-        className="min-h-screen flex flex-col"
-        style={{
-          backgroundImage: "url('./assets/Sitebg.jpg')", // Add a food-themed background
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-        }}
-      >
+      <div className="min-h-screen flex flex-col bg-gray-100">
         {/* Welcome Modal */}
         {showWelcome && <WelcomeModal onClose={() => setShowWelcome(false)} />}
 
