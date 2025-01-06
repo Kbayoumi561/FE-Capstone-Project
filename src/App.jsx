@@ -7,18 +7,17 @@ import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import RecipeDetails from './components/RecipeDetails';
 import ShoppingList from './pages/ShoppingList';
-import WelcomeModal from './components/WelcomeModal';
+import WelcomeModal from './components/WelcomeModal'; 
 import { fetchRecipes } from './utils/api';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState('');
   const [showWelcome, setShowWelcome] = useState(false);
-  const [showMobileMenu, setShowMobileMenu] = useState(false); // Added state for mobile menu visibility
 
   useEffect(() => {
     setShowWelcome(true); // Always show the modal
-  }, []);
+  }, []);  
 
   const handleCloseWelcomeModal = () => {
     setShowWelcome(false);
@@ -43,47 +42,15 @@ function App() {
 
         {/* Header */}
         <header className="bg-orange-500 text-white py-4 shadow-md">
-          <div className="container mx-auto px-4 flex justify-between items-center">
-            <h1 className="text-2xl md:text-3xl font-bold">Recipe Finder</h1>
-            <nav className="hidden md:flex space-x-4 text-lg">
-              <Link to="/" className="hover:underline">
-                Home
-              </Link>
-              <Link to="/favorites" className="hover:underline">
-                Favorites
-              </Link>
-              <Link to="/about" className="hover:underline">
-                About Us
-              </Link>
-              <Link to="/shopping-list" className="hover:underline">
-                Shopping List
-              </Link>
+          <div className="flex justify-between items-center px-4 lg:px-6">
+            <h1 className="text-3xl font-bold tracking-wide">Recipe Finder</h1>
+            <nav className="space-x-6 text-lg">
+              <Link to="/" className="hover:underline text-white">Home</Link>
+              <Link to="/favorites" className="hover:underline text-white">Favorites</Link>
+              <Link to="/about" className="hover:underline text-white">About Us</Link>
+              <Link to="/shopping-list" className="hover:underline text-white">Shopping List</Link>
             </nav>
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden text-white focus:outline-none"
-              onClick={() => setShowMobileMenu((prev) => !prev)}
-            >
-              ☰
-            </button>
           </div>
-          {/* Mobile Navigation */}
-          {showMobileMenu && (
-            <nav className="md:hidden bg-orange-500 text-white flex flex-col items-center space-y-2 mt-2 py-2">
-              <Link to="/" className="hover:underline">
-                Home
-              </Link>
-              <Link to="/favorites" className="hover:underline">
-                Favorites
-              </Link>
-              <Link to="/about" className="hover:underline">
-                About Us
-              </Link>
-              <Link to="/shopping-list" className="hover:underline">
-                Shopping List
-              </Link>
-            </nav>
-          )}
         </header>
 
         {/* Main Content */}
@@ -106,13 +73,9 @@ function App() {
 
         {/* Footer */}
         <footer className="bg-orange-500 text-white py-4">
-          <div className="container mx-auto px-4 flex justify-between items-center">
-            <Link to="/privacy" className="hover:underline">
-              Privacy Policy
-            </Link>
-            <Link to="/contact" className="hover:underline">
-              Contact Us
-            </Link>
+          <div className="flex justify-between items-center px-4 lg:px-6">
+            <Link to="/privacy" className="hover:underline text-white">Privacy Policy</Link>
+            <Link to="/contact" className="hover:underline text-white">Contact Us</Link>
           </div>
         </footer>
       </div>
