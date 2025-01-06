@@ -22,10 +22,8 @@ function App() {
   }, []);
 
   const handleSearch = async (query) => {
-    setError(''); // Reset the error
-    setRecipes([]); // Reset recipes for fresh results
+    setError('');
     try {
-      console.log(`Searching for: ${query}`); // Debugging logs
       const data = await fetchRecipes(query);
       setRecipes(data.meals || []);
     } catch (err) {
@@ -66,7 +64,7 @@ function App() {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2}
-                stroke="black"
+                stroke="black" /* Black lines inside the white box */
                 className="w-6 h-6"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
