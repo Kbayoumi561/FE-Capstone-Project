@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
@@ -8,6 +8,7 @@ import Privacy from './pages/Privacy';
 import RecipeDetails from './components/RecipeDetails';
 import ShoppingList from './pages/ShoppingList';
 import WelcomeModal from './components/WelcomeModal';
+import { fetchRecipes } from './utils/api';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -16,17 +17,16 @@ function App() {
   const [showWelcome, setShowWelcome] = useState(false);
 
   // Show welcome modal initially
-  useEffect(() => {
+  useState(() => {
     setShowWelcome(true);
   }, []);
 
   const handleSearch = async (query) => {
-    setError('');
+    setError(''); // Reset the error
+    setRecipes([]); // Reset recipes for fresh results
     try {
-      const response = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
-      );
-      const data = await response.json();
+      console.log(`Searching for: ${query}`); // Debugging logs
+      const data = await fetchRecipes(query);
       setRecipes(data.meals || []);
     } catch (err) {
       console.error('Error fetching recipes:', err);
