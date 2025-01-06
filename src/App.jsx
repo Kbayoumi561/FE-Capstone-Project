@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
@@ -7,21 +7,19 @@ import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import RecipeDetails from './components/RecipeDetails';
 import ShoppingList from './pages/ShoppingList';
-import WelcomeModal from './components/WelcomeModal'; 
+import WelcomeModal from './components/WelcomeModal';
 import { fetchRecipes } from './utils/api';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState('');
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
 
-  useEffect(() => {
-    setShowWelcome(true); // Always show the modal
-  }, []);  
-
-  const handleCloseWelcomeModal = () => {
-    setShowWelcome(false);
-  };
+  // Show welcome modal initially
+  useState(() => {
+    setShowWelcome(true);
+  }, []);
 
   const handleSearch = async (query) => {
     setError('');
@@ -38,19 +36,51 @@ function App() {
     <Router>
       <div className="min-h-screen flex flex-col bg-gray-100">
         {/* Welcome Modal */}
-        {showWelcome && <WelcomeModal onClose={handleCloseWelcomeModal} />}
+        {showWelcome && <WelcomeModal onClose={() => setShowWelcome(false)} />}
 
         {/* Header */}
         <header className="bg-orange-500 text-white py-4 shadow-md">
           <div className="flex justify-between items-center px-4 lg:px-6">
+            {/* Logo */}
             <h1 className="text-3xl font-bold tracking-wide">Recipe Finder</h1>
-            <nav className="space-x-6 text-lg">
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex space-x-6 text-lg">
               <Link to="/" className="hover:underline text-white">Home</Link>
               <Link to="/favorites" className="hover:underline text-white">Favorites</Link>
               <Link to="/about" className="hover:underline text-white">About Us</Link>
               <Link to="/shopping-list" className="hover:underline text-white">Shopping List</Link>
             </nav>
+
+            {/* Mobile Menu Icon */}
+            <button
+              className="md:hidden text-white"
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+              aria-label="Toggle Navigation Menu"
+            >
+              {/* Hamburger Icon */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            </button>
           </div>
+
+          {/* Mobile Navigation */}
+          {showMobileMenu && (
+            <nav className="md:hidden flex flex-col items-center bg-orange-500 space-y-2 mt-2">
+              <Link to="/" className="hover:underline text-white">Home</Link>
+              <Link to="/favorites" className="hover:underline text-white">Favorites</Link>
+              <Link to="/about" className="hover:underline text-white">About Us</Link>
+              <Link to="/shopping-list" className="hover:underline text-white">Shopping List</Link>
+            </nav>
+          )}
         </header>
 
         {/* Main Content */}
