@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
@@ -9,7 +9,6 @@ import RecipeDetails from './components/RecipeDetails';
 import ShoppingList from './pages/ShoppingList';
 import WelcomeModal from './components/WelcomeModal';
 import { fetchRecipes } from './utils/api';
-import './App.css';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -18,7 +17,7 @@ function App() {
   const [showWelcome, setShowWelcome] = useState(false);
 
   // Show welcome modal initially
-  useEffect(() => {
+  useState(() => {
     setShowWelcome(true);
   }, []);
 
@@ -35,36 +34,45 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-gray-100">
+        {/* Welcome Modal */}
         {showWelcome && <WelcomeModal onClose={() => setShowWelcome(false)} />}
 
         {/* Header */}
         <header className="bg-orange-500 text-white py-4 shadow-md">
           <div className="flex justify-between items-center px-4 lg:px-6">
+            {/* Logo */}
             <h1 className="text-3xl font-bold tracking-wide">Recipe Finder</h1>
+
+            {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-6 text-lg">
               <Link to="/" className="hover:underline text-white">Home</Link>
               <Link to="/favorites" className="hover:underline text-white">Favorites</Link>
               <Link to="/about" className="hover:underline text-white">About Us</Link>
               <Link to="/shopping-list" className="hover:underline text-white">Shopping List</Link>
             </nav>
+
+            {/* Mobile Menu Icon */}
             <button
               className="md:hidden bg-white p-2 rounded"
               onClick={() => setShowMobileMenu(!showMobileMenu)}
               aria-label="Toggle Navigation Menu"
             >
+              {/* Hamburger Icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2}
-                stroke="black"
+                stroke="black" /* Black lines inside the white box */
                 className="w-6 h-6"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
               </svg>
             </button>
           </div>
+
+          {/* Mobile Navigation */}
           {showMobileMenu && (
             <nav className="md:hidden flex flex-col items-center bg-orange-500 space-y-2 mt-2">
               <Link to="/" className="hover:underline text-white">Home</Link>

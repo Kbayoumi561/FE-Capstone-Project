@@ -3,10 +3,6 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-image: url('./assets/sitebg.jpg'); /* Add a representational background */
-  background-size: cover; /* Ensure the image covers the entire area */
-  background-position: center; /* Center the background image */
-  background-attachment: fixed; /* Keep the background fixed during scroll */
 }
 
 .logo {
@@ -39,9 +35,6 @@
 
 .card {
   padding: 2em;
-  background: rgba(255, 255, 255, 0.8); /* Add a slight white overlay for better readability */
-  border-radius: 8px; /* Rounded corners for the card */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
 }
 
 .read-the-docs {
